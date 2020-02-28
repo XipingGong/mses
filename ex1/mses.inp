@@ -15,11 +15,29 @@
  NBOND atom switch cdie vdw vswitch -
        ctonnb 16.0 ctofnb 18.0 cutnb 20.0
 
+! Harmonic restrict
+! -------------------------------------------------------------------
+ cons harm clear
+ cons harm force 5.0 sele segid AT .and. resid 2 .and. type CA end
+ cons harm force 5.0 sele segid CG .and. resid 2 .and. type CA end
+
+! BLOCK AT and CG system
+! -------------------------------------------------------------------
+block
+    clear  ! clear any prevous block setup as a safte guard
+end
+block 2  ! requesting blocks
+  call 1 select segid CG end  ! this is a special case
+  call 2 select segid AT end  ! block actually does not work in MSES calculations
+  coef 1 1 1.0
+  coef 2 2 1.0 
+  coef 1 2 0.0
+end
+
 ! MSES setup
 ! -------------------------------------------------------------------
  open read card unit 10 name contact.list
- MSES DIST FORC 1 IUNLIST 10 RSWI 2.0 FMAX 0.5 SEXP 1.0
- close unit 10
+ MSES scal 1.0 iunlist 10
 
 ! ENERGY TEST (CPU vs. CUDA)
 ! ---------------------------------------------------------------------

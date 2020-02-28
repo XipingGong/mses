@@ -8,5 +8,5 @@ This includes how to run the MSES energies, forces and NVE dynamics.
 
 ## ex2
 
-This includes how to run the MSES+GBMV energies, forces and NVE dynamics.
+This includes how to run the MSES-GBMV2/SA energies, forces and NVE dynamics.
 
