@@ -13,7 +13,8 @@ Date: 02/28/2020 (Xiping; second version)
 
 ## Executable CHARMM (included GBMV2/SA)
 
-Before running the following the examples, please install the CHARMM with MSES plugin (version > c45). Also, please run a test file included to make sure your installation is correct.
+Before running the following the examples, please install the CHARMM with MSES plugin (version > c45). 
+Also, please run a test file included to make sure your installation is correct.
 
 ## Running CHARMM input file
 
@@ -28,8 +29,9 @@ E.g., CHARMM='/home/ping/share/charmm/build/c42vby/charmm'
     Energy conservation (CUDA)
 
 > grep "DYNA>" msesgbmv.out
-
-> This is 2ps NVE simulations, please increase the simulation time to 300 ps to see what happened. Suggestion: before running the system, please make sure you do a NVE test, because
+>
+> This is 2ps NVE simulations, please increase the simulation time to 300 ps to see what it will happen. 
+> Suggestion: before running the system, please make sure you do a NVE test, because
 > energy conservation can make sure the energy and forces calculations are consistent.
 
 # Reference
