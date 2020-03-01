@@ -1,0 +1,41 @@
+* setup file for replica exchange MSES
+*
+
+!stream toppar.str
+
+! NonBond 
+! ------------------------------------------------------------------
+NBOND atom switch cdie vdw vswitch -
+      ctonnb 16.0 ctofnb 18.0 cutnb 20.0
+
+! GBMV implicit solvent model 
+! ------------------------------------------------------------------
+scalar wmain = radii
+set GBRAdiiname  = radii_c36gbmvop.str
+stream @GBRAdiiname
+scalar wmain set 0 sele segid CG end
+GBMV BETA -12  P3 0.65 WATR 1.4  SHIFT -0.102 SLOPE 0.9085  P6 8 SA 0.005 -
+     WTYP 2 nphi 38 KAPPA 0.0 weight
+
+! Harmonic restrict
+! -------------------------------------------------------------------
+ cons harm clear
+ cons harm force 5.0 sele segid AT .and. resid 2 .and. type CA end
+ cons harm force 5.0 sele segid CG .and. resid 2 .and. type CA end
+
+! BLOCK AT and CG system
+! -------------------------------------------------------------------
+block
+    clear 
+end
+block 2 
+  call 1 select segid CG end  ! this is a special case
+  call 2 select segid AT end  ! block actually does not work in MSES calculations
+  coef 1 1 1.0
+  coef 2 2 1.0
+  coef 1 2 0.0
+end
+
+shake  tolerance 1.0e-06 bonh param
+
+omm on

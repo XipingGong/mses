@@ -10,3 +10,7 @@ This includes how to run the MSES energies, forces and NVE dynamics.
 
 This includes how to run the MSES-GBMV2/SA energies, forces and NVE dynamics.
 
+## ex3
+
+Showing how to run the Temperature/MSES-GBMV2/SA replica exchange simulations.
+
